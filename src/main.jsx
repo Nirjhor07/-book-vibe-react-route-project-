@@ -1,10 +1,11 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import "./index.css";
-import Hudai from "./components/Hudai.jsx";
+import { RouterProvider } from "react-router";
+import { router } from "./routes/Routes";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <Hudai></Hudai>
+    <RouterProvider router={router}></RouterProvider>
   </StrictMode>,
 );
