@@ -42,7 +42,7 @@ const ReadListProvider = ({ children }) => {
       toast(`${book.bookName} already in Wish-list!`, { type: "warning" });
       return;
     } else {
-      const updateBooks = [...storedBooks, book];
+      const updateBooks = [...wishList, book];
       setWishList(updateBooks);
       toast(`${book.bookName} added to readlist successfully!`);
     }
