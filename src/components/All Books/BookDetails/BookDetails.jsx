@@ -1,5 +1,7 @@
-import React from "react";
+import { useContext } from "react";
 import { useLoaderData, useParams } from "react-router";
+import { ReadlistContext } from "../../ContextApi/ReadListProvider";
+import { ToastContainer } from "react-toastify";
 
 const BookDetails = () => {
   const books = useLoaderData();
@@ -17,15 +19,17 @@ const BookDetails = () => {
     totalPages,
     publisher,
     yearOfPublishing,
-    review
+    review,
   } = clickedBook;
 
+  // importing context for handleReadList function
+  const { handleReadList, handleWishList } = useContext(ReadlistContext);
+
   return (
-    <div className="max-w-6xl mx-auto mt-20 p-6 bg-base-200 rounded-2xl shadow-lg">
+    <div className="max-w-6xl mx-auto  p-6 bg-base-100 rounded-2xl shadow-lg sm:mt-20">
       <div className="grid lg:grid-cols-2 gap-10 items-center">
-        
         {/* LEFT SIDE IMAGE */}
-        <div className="bg-base-100 rounded-2xl p-6 flex justify-center">
+        <div className="bg-base-200 rounded-2xl p-6 flex justify-center">
           <img
             src={image}
             alt={bookName}
@@ -46,8 +50,7 @@ const BookDetails = () => {
 
           {/* Review (dummy text like UI) */}
           <p>
-            <span className="font-semibold">Review :</span>{" "}
-           {review}
+            <span className="font-semibold">Review :</span> {review}
           </p>
 
           {/* Tags */}
@@ -83,11 +86,22 @@ const BookDetails = () => {
 
           {/* Buttons */}
           <div className="flex gap-4 pt-4">
-            <button className="btn btn-outline">Read</button>
-            <button className="btn btn-info text-white">Wishlist</button>
+            <button
+              className="btn btn-outline"
+              onClick={() => handleReadList(clickedBook)}
+            >
+              Add to Readlist
+            </button>
+            <button
+              className="btn btn-info text-white"
+              onClick={() => handleWishList(clickedBook)}
+            >
+              Add to Wishlist
+            </button>
           </div>
         </div>
       </div>
+      <ToastContainer position="top-right" autoClose={3000} />
     </div>
   );
 };

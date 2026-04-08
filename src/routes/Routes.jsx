@@ -3,6 +3,8 @@ import RootLayout from "../layouts/RootLayout";
 import HomePage from "../Pages/HomePage/HomePage";
 import PageNotFound404 from "../Pages/404 page not found/PageNotFound404";
 import BookDetails from "../components/All Books/BookDetails/BookDetails";
+import ReadListBooks from "../components/ReadListedBooks/ReadListBooks";
+import WishListBooks from "../components/WishListsBooks/WishListBooks";
 
 export const router = createBrowserRouter([
   {
@@ -15,11 +17,11 @@ export const router = createBrowserRouter([
       },
       {
         path: "listedbooks",
-        element: <p>My listed books here</p>,
+        Component: WishListBooks,
       },
       {
         path: "pagesToRead",
-        element: <p>Pages to read</p>,
+        Component: ReadListBooks,
       },
       {
         path: "/bookdetails/:id",
