@@ -5,8 +5,21 @@ import { SlCalender } from "react-icons/sl";
 import { FaBookOpen } from "react-icons/fa6";
 import "react-tabs/style/react-tabs.css";
 
-const WishListBooks = () => {
+const WishListBooks = ({ sortBy }) => {
   const { wishList } = useContext(ReadlistContext);
+
+  // Sort books based on sortBy value
+  const getSortedBooks = () => {
+    let sorted = [...wishList];
+    if (sortBy === "Pages") {
+      sorted.sort((a, b) => b.totalPages - a.totalPages);
+    } else if (sortBy === "Rating") {
+      sorted.sort((a, b) => b.rating - a.rating);
+    }
+    return sorted;
+  };
+
+  const booksToDisplay = getSortedBooks();
 
   return (
     <>
@@ -18,7 +31,7 @@ const WishListBooks = () => {
           </p>
         ) : (
           <div className="space-y-4">
-            {wishList.map((book) => (
+            {booksToDisplay.map((book) => (
               <div
                 key={book.bookId}
                 className="card bg-base-100 shadow-md rounded-lg overflow-hidden border border-gray-200 flex flex-row"

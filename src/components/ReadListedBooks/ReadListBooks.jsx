@@ -4,8 +4,21 @@ import { Link } from "react-router";
 import { SlCalender } from "react-icons/sl";
 import { FaBookOpen } from "react-icons/fa6";
 
-const ReadListBooks = () => {
+const ReadListBooks = ({ sortBy }) => {
   const { storedBooks } = useContext(ReadlistContext);
+
+  // Sort books based on sortBy value
+  const getSortedBooks = () => {
+    let sorted = [...storedBooks];
+    if (sortBy === "Pages") {
+      sorted.sort((a, b) => b.totalPages - a.totalPages);
+    } else if (sortBy === "Rating") {
+      sorted.sort((a, b) => b.rating - a.rating);
+    }
+    return sorted;
+  };
+
+  const booksToDisplay = getSortedBooks();
 
   return (
     <div className="container mx-auto mt-10 mb-10 px-4">
@@ -16,7 +29,7 @@ const ReadListBooks = () => {
         </p>
       ) : (
         <div className="space-y-4">
-          {storedBooks.map((book) => (
+          {booksToDisplay.map((book) => (
             <div
               key={book.bookId}
               className="card bg-base-100 shadow-md rounded-lg overflow-hidden border border-gray-200 flex flex-row"
