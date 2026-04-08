@@ -24,7 +24,7 @@ export const router = createBrowserRouter([
       {
         path: "/bookdetails/:id",
         Component: BookDetails,
-        loader: () => fetch("/booksData.json").then((res) => res.json()),
+        loader: () => fetch("/booksData.json"),
       },
     ],
     errorElement: <PageNotFound404></PageNotFound404>,
